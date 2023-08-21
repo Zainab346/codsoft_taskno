@@ -1,0 +1,114 @@
+class Todolist:
+    def __init__(self):
+        self.tasks=[]
+    
+    #Function For adding new tasks
+    def Add_task(self , task):
+        self.tasks.append(task)
+        print(f"Task {task} added !!!!\n")
+        self.Show_task()
+    
+    #Function For showing tasks
+    def Show_task(self):
+        if not self.tasks:
+            print("No tasks in the list!!!\n")
+        else:
+            print(f"------|: YOUR LIST IS :|---------")
+            for index , value in enumerate(self.tasks ,start=1):
+                print(f"{index} :  {value}\n")
+    
+    #Function for updating tasks
+    def Update_task(self , index , new_task):
+          if 0<= index < len(self.tasks):
+                  self.tasks[index] = new_task
+                  print(f"Task {index+1}  updated to {new_task}....\n")
+                  self.Show_task()
+          else:
+                print("Please provide a valid index within the range\n")
+        
+    #Function for Completed tasks
+    def Complete_task(self , index ):
+         if not self.tasks:
+               print("NO TASKS IN THE LIST!!!!")
+         elif 0<= index < len(self.tasks):
+                self.tasks.pop(index)
+                print(f"Task {index+1}  Done!!!!....\n")
+                # self.Show_task()
+         else:
+                print("Please provide a valid index within the range\n ")
+            
+    
+    #Function for Deleting Task
+    def Delete_task(self,task):
+         print(f"Task to delete: {task} \n")
+         print(f"Tasks in the list: {self.tasks}\n")
+         if task in self.tasks:
+              while True:
+                      select =input(f"Are you sure you want to delete ({task}) from your to_do_list.? Y/N : ")
+                      if select.lower() =='y':
+                          self.tasks.remove(task)
+                          print("Task deleted successfully!!!!!\n")
+                          self.Show_task()
+                          break
+                      elif select.lower() == 'n':
+                          print("Task deleteion cancelled!!\n")
+                          break
+                      else:
+                          print("Invalid choice!!! Please choose Y / N...\n")
+         else:
+            print("Task not found in the list\n")
+
+                 
+def main():
+    todolist = Todolist()
+
+    while True :
+        ##Display Options
+        print ("------| <<TO_DO_LIST>> |-----\n")
+        print("1 :  .....ADD TASKS.......")
+        print("2 :  .....SHOW TASKS.......")
+        print("3 :  .....UPDATE TASKS.......")
+        print("4 :  .....COMPLETED TASKS.......")
+        print("5 :  .....DELETE TASKS.......")
+        print("6 :  .....EXIT!!!!.......")
+
+        choice =input("Enter your choice :")
+
+        if choice == '1':
+            new_task = input("Enter the task :").lower()
+            todolist.Add_task(new_task)
+
+        elif choice == '2':
+            todolist.Show_task()
+
+        elif choice == '3':
+            if not todolist.tasks:
+                 print("No Tasks in the list!!!\n")
+            else:
+                 index = int(input("Enter the task index :"))
+                 new_task = input("Enter the new task :")
+                 todolist.Update_task(index , new_task)
+
+        elif choice == '4':
+             if not todolist.tasks:
+                 print("No Tasks in the list!!!\n")
+             else:
+                 index =int(input("Enter the task index :"))
+                 todolist.Complete_task(index)
+        
+        elif choice == '5':
+            if not todolist.tasks:
+                 print("No Tasks in the list!!!\n")
+            else:
+                task = input("Enter the task you want to delete :").lower()
+                todolist.Delete_task(task)
+
+
+        elif choice == '6':
+            print( "EXIT!!!!...\n")
+            break
+        else:
+            print("INVALID CHOICE!!!!!!\n")
+
+if __name__ =="__main__":
+    main()
