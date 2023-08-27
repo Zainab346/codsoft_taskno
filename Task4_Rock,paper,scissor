@@ -1,0 +1,57 @@
+#   ///////  Rock , paper , Scissor  Game ////// 
+import random
+    
+#User Input
+def user_input():
+    user_input=input("Enter your choice: 'Rock', 'Paper' , 'Scissor' : ").lower()
+    while user_input not in ["rock" ,"paper" , "scissor"]:
+        print("Invalid choice !!!!")
+        user_input=input("Enter your choice: 'Rock', 'Paper' , 'Scissor' : ").lower()
+    return user_input
+
+#Computer Selection
+def comp_selection():
+    choices =["rock" , "paper" , "scissor"]
+    return random.choice(choices)
+
+
+#Game Logic
+def winner_selection(user_input,comp_input):
+    if user_input==comp_input:
+        return "<<<----| TIE !!! |---->>>"
+    
+    elif (user_input == "rock" and comp_input == "scissor")or(user_input == "scissor" and comp_input == "paper")or(user_input == "paper" and comp_input == "rock"):
+         return("<<<----| User Wins !!! |---->>>")
+    
+    else:
+         return("<<<----| Computer Wins !!! |---->>>")
+
+def main():
+
+    user_Score = 0 
+    comp_score=0
+    print("-------|<<<< \U0001F600 WELCOME TO 'ROCK' ,'PAPER' ,'SCISSOR' GAME \U0001F600  >>>>|----\n")
+    
+    play_again= "yes"
+    while play_again.lower() == "yes":
+          get_user_input=user_input()
+          get_comp_select=comp_selection()
+
+          print(f"Your Input Is: \t{get_user_input}\n")
+          print(f"Computer Input Is: {get_comp_select}\n")
+
+          Result = winner_selection(get_user_input,get_comp_select)
+          print(f"{Result}")
+
+          if "User Wins" in Result:
+               user_Score +=1
+          elif "Computer Wins " in Result:
+               comp_score +=1
+        
+          #Displaying Scores
+          print (f"User_Score : {user_Score}  \t ,  Comp_Score : {comp_score} \n" )
+               
+          play_again = input("Do You Want to Play again ? (yes/no) :")
+          
+if __name__ == "__main__":
+     main()
